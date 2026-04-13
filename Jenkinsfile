@@ -179,6 +179,16 @@ pipeline {
         }
         */
 
+        // ── Stage 8 : Déclencher deploy-dev ──────────
+        stage('Trigger Deploy DEV') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                build job: 'deploy-dev', wait: false
+            }
+        }
+
     } // fin stages
 
     // ─────────────────────────────────────────────────
