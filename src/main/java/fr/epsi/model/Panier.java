@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Panier d'achats de la boutique en ligne.
+ * Panier  d'achats de la boutique en ligne.
  * ICDE848 – TP Jenkins
  */
 public class Panier {

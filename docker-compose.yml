@@ -1,0 +1,26 @@
+services:
+  jenkins:
+    # On utilise notre Dockerfile custom (Jenkins + Docker CLI)
+    build: .
+    container_name: jenkins
+
+    # Ports exposés :
+    # 8080 = interface web Jenkins
+    # 50000 = communication avec les agents Jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+
+    volumes:
+      # Persiste toute la config Jenkins entre les redémarrages
+      - jenkins_home:/var/jenkins_home
+
+      # Donne accès au Docker de la machine hôte
+      # Jenkins pourra ainsi lancer des conteneurs Docker
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    restart: unless-stopped
+
+# Volume nommé pour persister les données Jenkins
+volumes:
+  jenkins_home:
