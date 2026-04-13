@@ -21,13 +21,14 @@
 
 pipeline {
 
-    // Exécuter sur n'importe quel agent disponible
-    agent any
-
-    // Outils configurés dans Global Tool Configuration
-    tools {
-        maven 'Maven3'    // Nom exact défini dans Jenkins
-        jdk   'JDK17'     // Nom exact défini dans Jenkins
+    // Exécuter dans un conteneur Maven (Docker)
+    // Plus besoin d'installer Java ou Maven sur Jenkins
+    agent {
+        docker {
+            image 'maven:3.9-eclipse-temurin-17'
+            // Cache le dépôt Maven local entre les builds pour aller plus vite
+            args '-v $HOME/.m2:/root/.m2'
+        }
     }
 
     // ─────────────────────────────────────────────────
