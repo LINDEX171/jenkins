@@ -179,6 +179,16 @@ pipeline {
         }
         */
 
+        // ── Stage 8 : Déclencher deploy-dev ──────────
+        stage('Trigger Deploy DEV') {
+            when {
+                expression { env.BRANCH_NAME == 'develop' }
+            }
+            steps {
+                build job: 'deploy-dev', wait: false
+            }
+        }
+
     } // fin stages
 
     // ─────────────────────────────────────────────────
