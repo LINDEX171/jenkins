@@ -113,16 +113,8 @@ pipeline {
         stage('Couverture JaCoCo') {
             steps {
                 sh 'mvn jacoco:report -B'
-            }
-            post {
-                always {
-                    jacoco(
-                        execPattern:   '**/target/jacoco.exec',
-                        classPattern:  '**/target/classes',
-                        sourcePattern: '**/src/main/java',
-                        minimumLineCoverage: '70'
-                    )
-                }
+                // Le rapport HTML est généré dans target/site/jacoco/
+                // Les seuils de couverture sont vérifiés par Maven (jacoco:check)
             }
         }
 
