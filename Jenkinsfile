@@ -191,6 +191,22 @@ pipeline {
             echo "Pipeline terminée — statut : ${currentBuild.currentResult}"
         }
 
+        // Seulement en cas de succès
+        success {
+            emailext(
+                subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+Le build a réussi.
+
+Projet  : ${env.JOB_NAME}
+Build   : #${env.BUILD_NUMBER}
+Branche : ${env.GIT_BRANCH}
+URL     : ${env.BUILD_URL}
+                """,
+                to: 'lindex1706@gmail.com'
+            )
+        }
+
         // Seulement en cas d'échec
         failure {
             emailext(
